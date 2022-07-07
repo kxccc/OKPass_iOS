@@ -34,6 +34,9 @@ class RegisterVC: LoginVC {
     @objc override func clickJumpButton() {
         navigationController?.popViewController(animated: true)
     }
-   
+    
+    @objc override func clickAccountButton() {
+    }
+ 
 
 }

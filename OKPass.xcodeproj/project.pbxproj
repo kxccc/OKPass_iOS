@@ -14,6 +14,9 @@
 		29C368112875B31A00FBD420 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29C3680F2875B31A00FBD420 /* LaunchScreen.storyboard */; };
 		29C3681C2875C7F000FBD420 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 29C3681B2875C7F000FBD420 /* IQKeyboardManagerSwift */; };
 		29C3681E28770C6E00FBD420 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C3681D28770C6E00FBD420 /* RegisterVC.swift */; };
+		29C368202877188000FBD420 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C3681F2877188000FBD420 /* TabBarController.swift */; };
+		29C36822287719AF00FBD420 /* PasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C36821287719AF00FBD420 /* PasswordVC.swift */; };
+		29C36824287719C600FBD420 /* MeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C36823287719C600FBD420 /* MeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		29C368102875B31A00FBD420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29C368122875B31A00FBD420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29C3681D28770C6E00FBD420 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		29C3681F2877188000FBD420 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		29C36821287719AF00FBD420 /* PasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVC.swift; sourceTree = "<group>"; };
+		29C36823287719C600FBD420 /* MeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 				29C368062875B31700FBD420 /* SceneDelegate.swift */,
 				29C368082875B31700FBD420 /* LoginVC.swift */,
 				29C3681D28770C6E00FBD420 /* RegisterVC.swift */,
+				29C3681F2877188000FBD420 /* TabBarController.swift */,
+				29C36821287719AF00FBD420 /* PasswordVC.swift */,
+				29C36823287719C600FBD420 /* MeVC.swift */,
 				29C3680D2875B31A00FBD420 /* Assets.xcassets */,
 				29C3680F2875B31A00FBD420 /* LaunchScreen.storyboard */,
 				29C368122875B31A00FBD420 /* Info.plist */,
@@ -148,8 +157,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				29C368092875B31700FBD420 /* LoginVC.swift in Sources */,
+				29C36822287719AF00FBD420 /* PasswordVC.swift in Sources */,
 				29C3681E28770C6E00FBD420 /* RegisterVC.swift in Sources */,
+				29C36824287719C600FBD420 /* MeVC.swift in Sources */,
 				29C368052875B31700FBD420 /* AppDelegate.swift in Sources */,
+				29C368202877188000FBD420 /* TabBarController.swift in Sources */,
 				29C368072875B31700FBD420 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

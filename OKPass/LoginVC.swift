@@ -60,6 +60,7 @@ class LoginVC: UIViewController {
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.isSecureTextEntry = true
         accountButton.configuration = UIButton.Configuration.filled()
+        accountButton.addTarget(self, action: #selector(clickAccountButton), for: .touchUpInside)
         
         vStack.addArrangedSubview(errorLabel)
         vStack.addArrangedSubview(emailTextField)
@@ -106,6 +107,12 @@ class LoginVC: UIViewController {
     @objc func clickJumpButton() {
         let vc = RegisterVC()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func clickAccountButton() {
+        let vc = TabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.present(vc, animated: true)
     }
     
 }
