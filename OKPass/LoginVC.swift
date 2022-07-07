@@ -8,14 +8,14 @@
 import UIKit
 
 class LoginVC: UIViewController {
-    private var errorLabel: UILabel!
-    private var emailTextField: UITextField!
-    private var passwordTextField: UITextField!
-    private var captchaTextField: UITextField!
-    private var getCaptchaButton: UIButton!
-    private var loginButton: UIButton!
-    private var accountStatusLabel: UILabel!
-    private var jumpButton: UIButton!
+    var errorLabel: UILabel!
+    var emailTextField: UITextField!
+    var passwordTextField: UITextField!
+    var captchaTextField: UITextField!
+    var getCaptchaButton: UIButton!
+    var accountButton: UIButton!
+    var accountStatusLabel: UILabel!
+    var jumpButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,17 +27,15 @@ class LoginVC: UIViewController {
         passwordTextField = UITextField()
         captchaTextField = UITextField()
         getCaptchaButton = UIButton()
-        loginButton = UIButton()
+        accountButton = UIButton()
         accountStatusLabel = UILabel()
         jumpButton = UIButton()
         
         
         let captchaStack = UIStackView()
         captchaStack.spacing = 15
-        captchaTextField.placeholder = "验证码"
         captchaTextField.borderStyle = .roundedRect
         getCaptchaButton.configuration = UIButton.Configuration.gray()
-        getCaptchaButton.setTitle("获取验证码", for: .normal)
         captchaStack.addArrangedSubview(captchaTextField)
         captchaStack.addArrangedSubview(getCaptchaButton)
         NSLayoutConstraint.activate([
@@ -46,7 +44,7 @@ class LoginVC: UIViewController {
         
         
         let jumpStack = genJumpStack()
-        
+       
         
         let vStack = UIStackView()
         vStack.translatesAutoresizingMaskIntoConstraints = false
@@ -58,30 +56,29 @@ class LoginVC: UIViewController {
         errorLabel.text = "123"
         errorLabel.textColor = .red
         errorLabel.textAlignment = .center
-        emailTextField.placeholder = "邮箱"
         emailTextField.borderStyle = .roundedRect
-        passwordTextField.placeholder = "密码"
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.isSecureTextEntry = true
-        loginButton.configuration = UIButton.Configuration.filled()
-        loginButton.setTitle("登录", for: .normal)
+        accountButton.configuration = UIButton.Configuration.filled()
         
         vStack.addArrangedSubview(errorLabel)
         vStack.addArrangedSubview(emailTextField)
         vStack.addArrangedSubview(passwordTextField)
         vStack.addArrangedSubview(captchaStack)
-        vStack.addArrangedSubview(loginButton)
+        vStack.addArrangedSubview(accountButton)
         vStack.addArrangedSubview(jumpStack)
+        
+        setText()
         
         NSLayoutConstraint.activate([
             vStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 60),
             vStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -60),
-            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
+            accountButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
             errorLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             emailTextField.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             passwordTextField.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             captchaStack.widthAnchor.constraint(equalTo: vStack.widthAnchor),
-            loginButton.widthAnchor.constraint(equalTo: vStack.widthAnchor),
+            accountButton.widthAnchor.constraint(equalTo: vStack.widthAnchor),
         ])
     }
     
@@ -91,11 +88,25 @@ class LoginVC: UIViewController {
         accountStatusLabel.text = "没有账号？"
         jumpButton.configuration = UIButton.Configuration.plain()
         jumpButton.setTitle("现在注册", for: .normal)
+        jumpButton.addTarget(self, action: #selector(clickJumpButton), for: .touchUpInside)
         jumpStack.addArrangedSubview(accountStatusLabel)
         jumpStack.addArrangedSubview(jumpButton)
         return jumpStack
     }
     
+    func setText() {
+        self.title = "登录"
+        emailTextField.placeholder = "邮箱"
+        passwordTextField.placeholder = "密码"
+        captchaTextField.placeholder = "验证码"
+        getCaptchaButton.setTitle("获取验证码", for: .normal)
+        accountButton.setTitle("登录", for: .normal)
+    }
+    
+    @objc func clickJumpButton() {
+        let vc = RegisterVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 
