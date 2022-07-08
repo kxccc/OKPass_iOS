@@ -23,6 +23,7 @@
 		29C3682F2877F5B000FBD420 /* MJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 29C3682E2877F5B000FBD420 /* MJRefresh */; };
 		29C368322877F62D00FBD420 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 29C368312877F62D00FBD420 /* PKHUD */; };
 		29C368342877FB0F00FBD420 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368332877FB0F00FBD420 /* NetworkAPI.swift */; };
+		29C368362878594300FBD420 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368352878594300FBD420 /* UserInfoManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		29C36823287719C600FBD420 /* MeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
 		29C368252877222F00FBD420 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		29C368332877FB0F00FBD420 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
+		29C368352878594300FBD420 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				29C368042875B31700FBD420 /* AppDelegate.swift */,
 				29C368062875B31700FBD420 /* SceneDelegate.swift */,
 				29C368082875B31700FBD420 /* LoginVC.swift */,
+				29C368352878594300FBD420 /* UserInfoManager.swift */,
 				29C368332877FB0F00FBD420 /* NetworkAPI.swift */,
 				29C3681D28770C6E00FBD420 /* RegisterVC.swift */,
 				29C3681F2877188000FBD420 /* TabBarController.swift */,
@@ -180,6 +183,7 @@
 			files = (
 				29C368092875B31700FBD420 /* LoginVC.swift in Sources */,
 				29C36822287719AF00FBD420 /* PasswordVC.swift in Sources */,
+				29C368362878594300FBD420 /* UserInfoManager.swift in Sources */,
 				29C368342877FB0F00FBD420 /* NetworkAPI.swift in Sources */,
 				29C3681E28770C6E00FBD420 /* RegisterVC.swift in Sources */,
 				29C368262877222F00FBD420 /* Models.swift in Sources */,

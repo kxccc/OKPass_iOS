@@ -40,8 +40,8 @@ class Password: Codable {
     var password: String
     var remark: String
     var category: String
-    
-    init(){
+
+    init() {
         id = -1
         title = ""
         url = ""
@@ -50,5 +50,4 @@ class Password: Codable {
         remark = ""
         category = ""
     }
-
 }

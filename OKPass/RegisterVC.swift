@@ -5,11 +5,10 @@
 //  Created by 陈治成 on 2022/7/7.
 //
 
-import UIKit
 import PKHUD
+import UIKit
 
 class RegisterVC: LoginVC {
-
     override func genJumpStack() -> UIStackView {
         let jumpStack = UIStackView()
         jumpStack.spacing = 0
@@ -21,20 +20,20 @@ class RegisterVC: LoginVC {
         jumpStack.addArrangedSubview(jumpButton)
         return jumpStack
     }
-    
+
     override func setText() {
-        self.title = "注册"
+        title = "注册"
         emailTextField.placeholder = "邮箱"
         passwordTextField.placeholder = "密码"
         captchaTextField.placeholder = "验证码"
         getCaptchaButton.setTitle("获取验证码", for: .normal)
         accountButton.setTitle("注册", for: .normal)
     }
- 
+
     @objc override func clickJumpButton() {
         navigationController?.popViewController(animated: true)
     }
-    
+
     @objc override func clickAccountButton() {
         let email = emailTextField.text ?? ""
         if email.isEmpty {
@@ -51,15 +50,14 @@ class RegisterVC: LoginVC {
             HUD.flash(.label("请输入验证码"), delay: 0.5)
             return
         }
-        
+
         NetworkAPI.Register(email: email, password: password, captcha: captcha, completion: { Result in
             switch Result {
             case let .success(res):
                 if res.status {
                     HUD.flash(.label("注册成功"), delay: 1)
                     self.navigationController?.popViewController(animated: true)
-                }
-                else {
+                } else {
                     HUD.flash(.label(res.msg), delay: 0.5)
                 }
             case let .failure(error):
@@ -67,7 +65,7 @@ class RegisterVC: LoginVC {
             }
         })
     }
-    
+
     @objc override func clickGetCaptchaButton() {
         let email = emailTextField.text ?? ""
         if email.isEmpty {
@@ -80,8 +78,7 @@ class RegisterVC: LoginVC {
             case let .success(res):
                 if res.status {
                     self.isCounting = true
-                }
-                else {
+                } else {
                     HUD.flash(.label(res.msg), delay: 0.5)
                 }
             case let .failure(error):
@@ -89,6 +86,4 @@ class RegisterVC: LoginVC {
             }
         })
     }
-
-
 }

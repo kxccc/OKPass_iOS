@@ -5,8 +5,8 @@
 //  Created by 陈治成 on 2022/7/6.
 //
 
-import UIKit
 import PKHUD
+import UIKit
 
 class LoginVC: UIViewController {
     var countdownTimer: Timer?
@@ -22,6 +22,7 @@ class LoginVC: UIViewController {
             getCaptchaButton.isEnabled = !newValue
         }
     }
+
     var remainingSeconds: Int = 0 {
         willSet {
             getCaptchaButton.setTitle("\(newValue)秒", for: .normal)
@@ -31,10 +32,11 @@ class LoginVC: UIViewController {
             }
         }
     }
+
     @objc func updateTime() {
         remainingSeconds -= 1
     }
-    
+
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
     var captchaTextField: UITextField!
@@ -42,12 +44,12 @@ class LoginVC: UIViewController {
     var accountButton: UIButton!
     var accountStatusLabel: UILabel!
     var jumpButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .white
-        
+
         emailTextField = UITextField()
         passwordTextField = UITextField()
         captchaTextField = UITextField()
@@ -55,8 +57,7 @@ class LoginVC: UIViewController {
         accountButton = UIButton()
         accountStatusLabel = UILabel()
         jumpButton = UIButton()
-        
-        
+
         let captchaStack = UIStackView()
         captchaStack.spacing = 15
         captchaTextField.borderStyle = .roundedRect
@@ -65,34 +66,32 @@ class LoginVC: UIViewController {
         captchaStack.addArrangedSubview(captchaTextField)
         captchaStack.addArrangedSubview(getCaptchaButton)
         NSLayoutConstraint.activate([
-            captchaTextField.widthAnchor.constraint(equalTo: captchaStack.widthAnchor, multiplier: 0.5)
+            captchaTextField.widthAnchor.constraint(equalTo: captchaStack.widthAnchor, multiplier: 0.5),
         ])
-        
-        
+
         let jumpStack = genJumpStack()
-       
-        
+
         let vStack = UIStackView()
         vStack.translatesAutoresizingMaskIntoConstraints = false
         vStack.spacing = 15
         vStack.axis = .vertical
         vStack.alignment = .center
         view.addSubview(vStack)
-        
+
         emailTextField.borderStyle = .roundedRect
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.isSecureTextEntry = true
         accountButton.configuration = UIButton.Configuration.filled()
         accountButton.addTarget(self, action: #selector(clickAccountButton), for: .touchUpInside)
-        
+
         vStack.addArrangedSubview(emailTextField)
         vStack.addArrangedSubview(passwordTextField)
         vStack.addArrangedSubview(captchaStack)
         vStack.addArrangedSubview(accountButton)
         vStack.addArrangedSubview(jumpStack)
-        
+
         setText()
-        
+
         NSLayoutConstraint.activate([
             vStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 60),
             vStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -60),
@@ -103,7 +102,7 @@ class LoginVC: UIViewController {
             accountButton.widthAnchor.constraint(equalTo: vStack.widthAnchor),
         ])
     }
-    
+
     func genJumpStack() -> UIStackView {
         let jumpStack = UIStackView()
         jumpStack.spacing = 0
@@ -115,21 +114,21 @@ class LoginVC: UIViewController {
         jumpStack.addArrangedSubview(jumpButton)
         return jumpStack
     }
-    
+
     func setText() {
-        self.title = "登录"
+        title = "登录"
         emailTextField.placeholder = "邮箱"
         passwordTextField.placeholder = "密码"
         captchaTextField.placeholder = "验证码"
         getCaptchaButton.setTitle("获取验证码", for: .normal)
         accountButton.setTitle("登录", for: .normal)
     }
-    
+
     @objc func clickJumpButton() {
         let vc = RegisterVC()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     @objc func clickAccountButton() {
         let email = emailTextField.text ?? ""
         if email.isEmpty {
@@ -146,7 +145,7 @@ class LoginVC: UIViewController {
             HUD.flash(.label("请输入验证码"), delay: 0.5)
             return
         }
-        
+
         NetworkAPI.Login(email: email, password: password, captcha: captcha, completion: { Result in
             switch Result {
             case let .success(res):
@@ -154,8 +153,7 @@ class LoginVC: UIViewController {
                     let vc = TabBarController()
                     vc.modalPresentationStyle = .fullScreen
                     self.navigationController?.present(vc, animated: true)
-                }
-                else {
+                } else {
                     HUD.flash(.label(res.msg), delay: 0.5)
                 }
             case let .failure(error):
@@ -163,7 +161,7 @@ class LoginVC: UIViewController {
             }
         })
     }
-    
+
     @objc func clickGetCaptchaButton() {
         let email = emailTextField.text ?? ""
         if email.isEmpty {
@@ -175,8 +173,7 @@ class LoginVC: UIViewController {
             case let .success(res):
                 if res.status {
                     self.isCounting = true
-                }
-                else {
+                } else {
                     HUD.flash(.label(res.msg), delay: 0.5)
                 }
             case let .failure(error):
@@ -184,6 +181,4 @@ class LoginVC: UIViewController {
             }
         })
     }
-    
 }
-
