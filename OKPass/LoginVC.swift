@@ -105,9 +105,37 @@ class LoginVC: UIViewController {
     }
     
     @objc func clickAccountButton() {
-        let vc = TabBarController()
-        vc.modalPresentationStyle = .fullScreen
-        navigationController?.present(vc, animated: true)
+        let email = emailTextField.text ?? ""
+        if email.isEmpty {
+            HUD.flash(.label("请输入邮箱"), delay: 0.5)
+            return
+        }
+        let password = passwordTextField.text ?? ""
+        if password.isEmpty {
+            HUD.flash(.label("请输入密码"), delay: 0.5)
+            return
+        }
+        let captcha = captchaTextField.text ?? ""
+        if captcha.isEmpty {
+            HUD.flash(.label("请输入验证码"), delay: 0.5)
+            return
+        }
+        
+        NetworkAPI.Login(email: email, password: password, captcha: captcha, completion: { Result in
+            switch Result {
+            case let .success(res):
+                if res.status {
+                    let vc = TabBarController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.navigationController?.present(vc, animated: true)
+                }
+                else {
+                    HUD.flash(.label(res.msg), delay: 0.5)
+                }
+            case let .failure(error):
+                HUD.flash(.label(error.localizedDescription), delay: 0.5)
+            }
+        })
     }
     
     @objc func clickGetCaptchaButton() {

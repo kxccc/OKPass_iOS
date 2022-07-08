@@ -21,7 +21,7 @@ class NetworkAPI {
         ).responseData { response in
             switch response.result {
             case let .success(data):
-                if let res = try? JSONDecoder().decode(GeneralRes.self, from:data) {
+                if let res = try? JSONDecoder().decode(GeneralRes.self, from: data) {
                     completion(.success(res))
                 }
                 else{
@@ -32,7 +32,31 @@ class NetworkAPI {
                 completion(.failure(error))
             }
         }
-       
+    }
+    
+    static func Login(email: String, password: String, captcha: String, completion: @escaping (Result<LoginRes, Error>) -> Void) {
+        let url = baseUrl + "api/login"
+        AF.request(url,
+                   method: .post,
+                   parameters: ["email": email,
+                                "password": password,
+                                "captcha": captcha
+                               ],
+                   encoding: JSONEncoding.default
+        ).responseData { response in
+            switch response.result {
+            case let .success(data):
+                if let res = try? JSONDecoder().decode(LoginRes.self, from: data) {
+                    completion(.success(res))
+                }
+                else{
+                    let error = NSError(domain: "NetworkAPIDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "Decode error"])
+                    completion(.failure(error))
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
     }
     
 
