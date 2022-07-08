@@ -150,6 +150,7 @@ class LoginVC: UIViewController {
             switch Result {
             case let .success(res):
                 if res.status {
+                    UserInfoManager.shared.save(user: email, token: res.data!.token, key: res.data!.key)
                     let vc = TabBarController()
                     vc.modalPresentationStyle = .fullScreen
                     self.navigationController?.present(vc, animated: true)
