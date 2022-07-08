@@ -18,19 +18,19 @@ class MeVC: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        
+
         avatarImageView = UIImageView()
         userLabel = UILabel()
         fingerprintLabel = UILabel()
         fingerprintSwitch = UISwitch()
         changePasswordButton = UIButton()
         logoutButton = UIButton()
-        
+
         let fingerprintStack = UIStackView()
         fingerprintStack.spacing = 0
         fingerprintStack.addArrangedSubview(fingerprintLabel)
         fingerprintStack.addArrangedSubview(fingerprintSwitch)
-        
+
         avatarImageView.image = UIImage(systemName: "person.circle.fill")
         avatarImageView.contentMode = .scaleAspectFit
         userLabel.text = UserInfoManager.shared.user
@@ -41,8 +41,8 @@ class MeVC: UIViewController {
         logoutButton.configuration = UIButton.Configuration.filled()
         logoutButton.setTitle("退出登录", for: .normal)
         logoutButton.tintColor = .red
-        
-        let vStack=UIStackView()
+
+        let vStack = UIStackView()
         view.addSubview(vStack)
         vStack.translatesAutoresizingMaskIntoConstraints = false
         vStack.spacing = 15
@@ -53,7 +53,7 @@ class MeVC: UIViewController {
         vStack.addArrangedSubview(fingerprintStack)
         vStack.addArrangedSubview(changePasswordButton)
         vStack.addArrangedSubview(logoutButton)
-        
+
         NSLayoutConstraint.activate([
             vStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 60),
             vStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -60),
