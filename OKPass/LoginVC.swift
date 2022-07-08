@@ -103,6 +103,14 @@ class LoginVC: UIViewController {
         ])
     }
 
+    override func viewWillAppear(_: Bool) {
+        if UserInfoManager.shared.load() {
+            let vc = TabBarController()
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.present(vc, animated: true)
+        }
+    }
+
     func genJumpStack() -> UIStackView {
         let jumpStack = UIStackView()
         jumpStack.spacing = 0

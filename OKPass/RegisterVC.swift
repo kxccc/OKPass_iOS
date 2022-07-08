@@ -9,6 +9,8 @@ import PKHUD
 import UIKit
 
 class RegisterVC: LoginVC {
+    override func viewWillAppear(_: Bool) {}
+
     override func genJumpStack() -> UIStackView {
         let jumpStack = UIStackView()
         jumpStack.spacing = 0
