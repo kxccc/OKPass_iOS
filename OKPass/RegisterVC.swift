@@ -79,7 +79,7 @@ class RegisterVC: LoginVC {
             switch Result {
             case let .success(res):
                 if res.status {
-                    print("cg")
+                    self.isCounting = true
                 }
                 else {
                     HUD.flash(.label(res.msg), delay: 0.5)

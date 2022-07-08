@@ -9,6 +9,32 @@ import UIKit
 import PKHUD
 
 class LoginVC: UIViewController {
+    var countdownTimer: Timer?
+    var isCounting = false {
+        willSet {
+            if newValue {
+                countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+                remainingSeconds = 60
+            } else {
+                countdownTimer?.invalidate()
+                countdownTimer = nil
+            }
+            getCaptchaButton.isEnabled = !newValue
+        }
+    }
+    var remainingSeconds: Int = 0 {
+        willSet {
+            getCaptchaButton.setTitle("\(newValue)秒", for: .normal)
+            if newValue <= 0 {
+                getCaptchaButton.setTitle("重新获取", for: .normal)
+                isCounting = false
+            }
+        }
+    }
+    @objc func updateTime() {
+        remainingSeconds -= 1
+    }
+    
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
     var captchaTextField: UITextField!
@@ -144,12 +170,11 @@ class LoginVC: UIViewController {
             HUD.flash(.label("请输入邮箱"), delay: 0.5)
             return
         }
-
         NetworkAPI.getLoginCaptcha(email: email, completion: { Result in
             switch Result {
             case let .success(res):
                 if res.status {
-                    print("cg")
+                    self.isCounting = true
                 }
                 else {
                     HUD.flash(.label(res.msg), delay: 0.5)
