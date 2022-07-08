@@ -17,6 +17,12 @@
 		29C368202877188000FBD420 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C3681F2877188000FBD420 /* TabBarController.swift */; };
 		29C36822287719AF00FBD420 /* PasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C36821287719AF00FBD420 /* PasswordVC.swift */; };
 		29C36824287719C600FBD420 /* MeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C36823287719C600FBD420 /* MeVC.swift */; };
+		29C368262877222F00FBD420 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368252877222F00FBD420 /* Models.swift */; };
+		29C368292877F46700FBD420 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 29C368282877F46700FBD420 /* RNCryptor */; };
+		29C3682C2877F48D00FBD420 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 29C3682B2877F48D00FBD420 /* Alamofire */; };
+		29C3682F2877F5B000FBD420 /* MJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 29C3682E2877F5B000FBD420 /* MJRefresh */; };
+		29C368322877F62D00FBD420 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 29C368312877F62D00FBD420 /* PKHUD */; };
+		29C368342877FB0F00FBD420 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368332877FB0F00FBD420 /* NetworkAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +37,8 @@
 		29C3681F2877188000FBD420 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		29C36821287719AF00FBD420 /* PasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVC.swift; sourceTree = "<group>"; };
 		29C36823287719C600FBD420 /* MeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
+		29C368252877222F00FBD420 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		29C368332877FB0F00FBD420 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +46,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29C3682C2877F48D00FBD420 /* Alamofire in Frameworks */,
+				29C368292877F46700FBD420 /* RNCryptor in Frameworks */,
 				29C3681C2875C7F000FBD420 /* IQKeyboardManagerSwift in Frameworks */,
+				29C368322877F62D00FBD420 /* PKHUD in Frameworks */,
+				29C3682F2877F5B000FBD420 /* MJRefresh in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,8 +79,10 @@
 				29C368042875B31700FBD420 /* AppDelegate.swift */,
 				29C368062875B31700FBD420 /* SceneDelegate.swift */,
 				29C368082875B31700FBD420 /* LoginVC.swift */,
+				29C368332877FB0F00FBD420 /* NetworkAPI.swift */,
 				29C3681D28770C6E00FBD420 /* RegisterVC.swift */,
 				29C3681F2877188000FBD420 /* TabBarController.swift */,
+				29C368252877222F00FBD420 /* Models.swift */,
 				29C36821287719AF00FBD420 /* PasswordVC.swift */,
 				29C36823287719C600FBD420 /* MeVC.swift */,
 				29C3680D2875B31A00FBD420 /* Assets.xcassets */,
@@ -96,6 +110,10 @@
 			name = OKPass;
 			packageProductDependencies = (
 				29C3681B2875C7F000FBD420 /* IQKeyboardManagerSwift */,
+				29C368282877F46700FBD420 /* RNCryptor */,
+				29C3682B2877F48D00FBD420 /* Alamofire */,
+				29C3682E2877F5B000FBD420 /* MJRefresh */,
+				29C368312877F62D00FBD420 /* PKHUD */,
 			);
 			productName = OKPass;
 			productReference = 29C368012875B31700FBD420 /* OKPass.app */;
@@ -129,6 +147,10 @@
 				29C368182875C72800FBD420 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				29C368192875C7D400FBD420 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				29C3681A2875C7F000FBD420 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				29C368272877F46600FBD420 /* XCRemoteSwiftPackageReference "RNCryptor" */,
+				29C3682A2877F48D00FBD420 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				29C3682D2877F5B000FBD420 /* XCRemoteSwiftPackageReference "MJRefresh" */,
+				29C368302877F62D00FBD420 /* XCRemoteSwiftPackageReference "PKHUD" */,
 			);
 			productRefGroup = 29C368022875B31700FBD420 /* Products */;
 			projectDirPath = "";
@@ -158,7 +180,9 @@
 			files = (
 				29C368092875B31700FBD420 /* LoginVC.swift in Sources */,
 				29C36822287719AF00FBD420 /* PasswordVC.swift in Sources */,
+				29C368342877FB0F00FBD420 /* NetworkAPI.swift in Sources */,
 				29C3681E28770C6E00FBD420 /* RegisterVC.swift in Sources */,
+				29C368262877222F00FBD420 /* Models.swift in Sources */,
 				29C36824287719C600FBD420 /* MeVC.swift in Sources */,
 				29C368052875B31700FBD420 /* AppDelegate.swift in Sources */,
 				29C368202877188000FBD420 /* TabBarController.swift in Sources */,
@@ -398,6 +422,38 @@
 				kind = branch;
 			};
 		};
+		29C368272877F46600FBD420 /* XCRemoteSwiftPackageReference "RNCryptor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RNCryptor/RNCryptor.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		29C3682A2877F48D00FBD420 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		29C3682D2877F5B000FBD420 /* XCRemoteSwiftPackageReference "MJRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoderMJLee/MJRefresh";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		29C368302877F62D00FBD420 /* XCRemoteSwiftPackageReference "PKHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pkluz/PKHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -405,6 +461,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 29C3681A2875C7F000FBD420 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		29C368282877F46700FBD420 /* RNCryptor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C368272877F46600FBD420 /* XCRemoteSwiftPackageReference "RNCryptor" */;
+			productName = RNCryptor;
+		};
+		29C3682B2877F48D00FBD420 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C3682A2877F48D00FBD420 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		29C3682E2877F5B000FBD420 /* MJRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C3682D2877F5B000FBD420 /* XCRemoteSwiftPackageReference "MJRefresh" */;
+			productName = MJRefresh;
+		};
+		29C368312877F62D00FBD420 /* PKHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C368302877F62D00FBD420 /* XCRemoteSwiftPackageReference "PKHUD" */;
+			productName = PKHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

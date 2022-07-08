@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import PKHUD
 
 class LoginVC: UIViewController {
-    var errorLabel: UILabel!
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
     var captchaTextField: UITextField!
@@ -22,7 +22,6 @@ class LoginVC: UIViewController {
         
         view.backgroundColor = .white
         
-        errorLabel = UILabel()
         emailTextField = UITextField()
         passwordTextField = UITextField()
         captchaTextField = UITextField()
@@ -36,6 +35,7 @@ class LoginVC: UIViewController {
         captchaStack.spacing = 15
         captchaTextField.borderStyle = .roundedRect
         getCaptchaButton.configuration = UIButton.Configuration.gray()
+        getCaptchaButton.addTarget(self, action: #selector(clickGetCaptchaButton), for: .touchUpInside)
         captchaStack.addArrangedSubview(captchaTextField)
         captchaStack.addArrangedSubview(getCaptchaButton)
         NSLayoutConstraint.activate([
@@ -53,16 +53,12 @@ class LoginVC: UIViewController {
         vStack.alignment = .center
         view.addSubview(vStack)
         
-        errorLabel.text = "123"
-        errorLabel.textColor = .red
-        errorLabel.textAlignment = .center
         emailTextField.borderStyle = .roundedRect
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.isSecureTextEntry = true
         accountButton.configuration = UIButton.Configuration.filled()
         accountButton.addTarget(self, action: #selector(clickAccountButton), for: .touchUpInside)
         
-        vStack.addArrangedSubview(errorLabel)
         vStack.addArrangedSubview(emailTextField)
         vStack.addArrangedSubview(passwordTextField)
         vStack.addArrangedSubview(captchaStack)
@@ -75,7 +71,6 @@ class LoginVC: UIViewController {
             vStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 60),
             vStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -60),
             accountButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
-            errorLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             emailTextField.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             passwordTextField.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             captchaStack.widthAnchor.constraint(equalTo: vStack.widthAnchor),
@@ -113,6 +108,28 @@ class LoginVC: UIViewController {
         let vc = TabBarController()
         vc.modalPresentationStyle = .fullScreen
         navigationController?.present(vc, animated: true)
+    }
+    
+    @objc func clickGetCaptchaButton() {
+        let email = emailTextField.text ?? ""
+        if email.isEmpty {
+            HUD.flash(.label("请输入邮箱"), delay: 0.5)
+            return
+        }
+
+        NetworkAPI.getLoginCaptcha(email: email, completion: { Result in
+            switch Result {
+            case let .success(res):
+                if res.status {
+                    print("cg")
+                }
+                else {
+                    HUD.flash(.label(res.msg), delay: 0.5)
+                }
+            case let .failure(error):
+                HUD.flash(.label(error.localizedDescription), delay: 0.5)
+            }
+        })
     }
     
 }
