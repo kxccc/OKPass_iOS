@@ -25,6 +25,7 @@
 		29C368342877FB0F00FBD420 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368332877FB0F00FBD420 /* NetworkAPI.swift */; };
 		29C368362878594300FBD420 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368352878594300FBD420 /* UserInfoManager.swift */; };
 		29C3683A2879A43C00FBD420 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368392879A43C00FBD420 /* ChangePasswordVC.swift */; };
+		29C3683C2879C43E00FBD420 /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C3683B2879C43E00FBD420 /* Biometrics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		29C368332877FB0F00FBD420 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		29C368352878594300FBD420 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		29C368392879A43C00FBD420 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		29C3683B2879C43E00FBD420 /* Biometrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometrics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				29C368042875B31700FBD420 /* AppDelegate.swift */,
 				29C368062875B31700FBD420 /* SceneDelegate.swift */,
 				29C368082875B31700FBD420 /* LoginVC.swift */,
+				29C3683B2879C43E00FBD420 /* Biometrics.swift */,
 				29C368352878594300FBD420 /* UserInfoManager.swift */,
 				29C368332877FB0F00FBD420 /* NetworkAPI.swift */,
 				29C3681D28770C6E00FBD420 /* RegisterVC.swift */,
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29C3683C2879C43E00FBD420 /* Biometrics.swift in Sources */,
 				29C368092875B31700FBD420 /* LoginVC.swift in Sources */,
 				29C36822287719AF00FBD420 /* PasswordListVC.swift in Sources */,
 				29C368362878594300FBD420 /* UserInfoManager.swift in Sources */,

@@ -10,8 +10,8 @@ import UIKit
 class MeVC: UIViewController {
     private var avatarImageView: UIImageView!
     private var userLabel: UILabel!
-    private var fingerprintLabel: UILabel!
-    private var fingerprintSwitch: UISwitch!
+    private var biometricsLabel: UILabel!
+    private var biometricsSwitch: UISwitch!
     private var changePasswordButton: UIButton!
     private var logoutButton: UIButton!
     override func viewDidLoad() {
@@ -21,21 +21,24 @@ class MeVC: UIViewController {
 
         avatarImageView = UIImageView()
         userLabel = UILabel()
-        fingerprintLabel = UILabel()
-        fingerprintSwitch = UISwitch()
+        biometricsLabel = UILabel()
+        biometricsSwitch = UISwitch()
         changePasswordButton = UIButton()
         logoutButton = UIButton()
 
-        let fingerprintStack = UIStackView()
-        fingerprintStack.spacing = 0
-        fingerprintStack.addArrangedSubview(fingerprintLabel)
-        fingerprintStack.addArrangedSubview(fingerprintSwitch)
+        let biometricsStack = UIStackView()
+        biometricsStack.spacing = 0
+        biometricsStack.addArrangedSubview(biometricsLabel)
+        biometricsStack.addArrangedSubview(biometricsSwitch)
 
         avatarImageView.image = UIImage(systemName: "person.circle.fill")
         avatarImageView.contentMode = .scaleAspectFit
         userLabel.text = UserInfoManager.shared.userInfo.user
         userLabel.font = UIFont.systemFont(ofSize: 25)
-        fingerprintLabel.text = "启用指纹验证"
+        biometricsLabel.text = "启用生物识别验证"
+        biometricsSwitch.isEnabled = Biometrics.shared.canEvaluatePolicy()
+        biometricsSwitch.isOn = UserInfoManager.shared.userInfo.enableBiometrics
+        biometricsSwitch.addTarget(self, action: #selector(clickBiometricsSwitch), for: .touchUpInside)
         changePasswordButton.configuration = UIButton.Configuration.gray()
         changePasswordButton.setTitle("修改登录密码", for: .normal)
         changePasswordButton.addTarget(self, action: #selector(clickChangePasswordButton), for: .touchUpInside)
@@ -52,7 +55,7 @@ class MeVC: UIViewController {
         vStack.alignment = .center
         vStack.addArrangedSubview(avatarImageView)
         vStack.addArrangedSubview(userLabel)
-        vStack.addArrangedSubview(fingerprintStack)
+        vStack.addArrangedSubview(biometricsStack)
         vStack.addArrangedSubview(changePasswordButton)
         vStack.addArrangedSubview(logoutButton)
 
@@ -62,7 +65,7 @@ class MeVC: UIViewController {
             vStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             avatarImageView.widthAnchor.constraint(equalToConstant: 150),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
-            fingerprintStack.widthAnchor.constraint(equalTo: vStack.widthAnchor),
+            biometricsStack.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             changePasswordButton.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             logoutButton.widthAnchor.constraint(equalTo: vStack.widthAnchor),
         ])
@@ -78,5 +81,11 @@ class MeVC: UIViewController {
 
     @objc func clickChangePasswordButton() {
         navigationController?.pushViewController(ChangePasswordVC(), animated: true)
+    }
+
+    @objc func clickBiometricsSwitch() {
+        UserInfoManager.shared.userInfo.enableBiometrics = biometricsSwitch.isOn
+        UserInfoManager.shared.save()
+        if biometricsSwitch.isOn {}
     }
 }

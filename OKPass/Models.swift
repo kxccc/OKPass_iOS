@@ -46,5 +46,5 @@ class UserInfo: Codable {
     var user: String = ""
     var token: String = ""
     var key: String = ""
-    var enableFingerprint: Bool = false
+    var enableBiometrics: Bool = false
 }

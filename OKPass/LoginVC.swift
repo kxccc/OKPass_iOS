@@ -104,10 +104,11 @@ class LoginVC: UIViewController {
     }
 
     override func viewWillAppear(_: Bool) {
-        if UserInfoManager.shared.load() {
+        if UserInfoManager.shared.load() && UserInfoManager.shared.userInfo.enableBiometrics {
+            Biometrics.shared.authorizeBiometrics()
             let vc = TabBarController()
             vc.modalPresentationStyle = .fullScreen
-            navigationController?.present(vc, animated: true)
+            navigationController?.present(vc, animated: false)
         }
     }
 

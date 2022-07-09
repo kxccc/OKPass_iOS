@@ -31,6 +31,14 @@ class UserInfoManager {
         }
     }
 
+    func save() {
+        if let data = try? JSONEncoder().encode(userInfo) {
+            lock.wait()
+            try? data.write(to: userInfoUrl)
+            lock.signal()
+        }
+    }
+
     func remove() {
         try? FileManager.default.removeItem(at: userInfoUrl)
     }
@@ -41,6 +49,7 @@ class UserInfoManager {
             let data = try Data(contentsOf: userInfoUrl)
 
             userInfo = try JSONDecoder().decode(UserInfo.self, from: data)
+            lock.signal()
             return true
         } catch {}
         lock.signal()
