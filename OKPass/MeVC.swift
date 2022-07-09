@@ -33,7 +33,7 @@ class MeVC: UIViewController {
 
         avatarImageView.image = UIImage(systemName: "person.circle.fill")
         avatarImageView.contentMode = .scaleAspectFit
-        userLabel.text = UserInfoManager.shared.user
+        userLabel.text = UserInfoManager.shared.userInfo.user
         userLabel.font = UIFont.systemFont(ofSize: 25)
         fingerprintLabel.text = "启用指纹验证"
         changePasswordButton.configuration = UIButton.Configuration.gray()
@@ -41,6 +41,7 @@ class MeVC: UIViewController {
         logoutButton.configuration = UIButton.Configuration.filled()
         logoutButton.setTitle("退出登录", for: .normal)
         logoutButton.tintColor = .red
+        logoutButton.addTarget(self, action: #selector(clickLogoutButton), for: .touchUpInside)
 
         let vStack = UIStackView()
         view.addSubview(vStack)
@@ -60,8 +61,17 @@ class MeVC: UIViewController {
             vStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             avatarImageView.widthAnchor.constraint(equalToConstant: 150),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
+            fingerprintStack.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             changePasswordButton.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             logoutButton.widthAnchor.constraint(equalTo: vStack.widthAnchor),
         ])
+    }
+
+    @objc func clickLogoutButton() {
+        UserInfoManager.shared.remove()
+        let vc = LoginVC()
+        let nc = UINavigationController(rootViewController: vc)
+        nc.modalPresentationStyle = .fullScreen
+        navigationController?.present(nc, animated: true)
     }
 }

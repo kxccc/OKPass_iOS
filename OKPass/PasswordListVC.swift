@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PasswordVC: UIViewController {
+class PasswordListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 

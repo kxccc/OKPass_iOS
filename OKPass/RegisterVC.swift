@@ -26,6 +26,7 @@ class RegisterVC: LoginVC {
     override func setText() {
         title = "注册"
         emailTextField.placeholder = "邮箱"
+        emailTextField.spellCheckingType = .no
         passwordTextField.placeholder = "密码"
         captchaTextField.placeholder = "验证码"
         getCaptchaButton.setTitle("获取验证码", for: .normal)

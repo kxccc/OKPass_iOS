@@ -126,6 +126,7 @@ class LoginVC: UIViewController {
     func setText() {
         title = "登录"
         emailTextField.placeholder = "邮箱"
+        emailTextField.spellCheckingType = .no
         passwordTextField.placeholder = "密码"
         captchaTextField.placeholder = "验证码"
         getCaptchaButton.setTitle("获取验证码", for: .normal)

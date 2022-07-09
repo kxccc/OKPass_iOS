@@ -11,7 +11,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let vc = PasswordVC()
+        let vc = PasswordListVC()
         vc.title = "密码本"
         vc.tabBarItem.image = UIImage(systemName: "key.icloud")
         vc.tabBarItem.selectedImage = UIImage(systemName: "key.icloud.fill")

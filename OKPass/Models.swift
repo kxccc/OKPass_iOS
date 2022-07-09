@@ -33,21 +33,18 @@ class GetPasswordRes: Codable {
 }
 
 class Password: Codable {
-    var id: Int
-    var title: String
-    var url: String
-    var username: String
-    var password: String
-    var remark: String
-    var category: String
+    var id: Int = -1
+    var title: String = ""
+    var url: String = ""
+    var username: String = ""
+    var password: String = ""
+    var remark: String = ""
+    var category: String = ""
+}
 
-    init() {
-        id = -1
-        title = ""
-        url = ""
-        username = ""
-        password = ""
-        remark = ""
-        category = ""
-    }
+class UserInfo: Codable {
+    var user: String = ""
+    var token: String = ""
+    var key: String = ""
+    var enableFingerprint: Bool = false
 }
