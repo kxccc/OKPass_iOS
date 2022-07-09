@@ -24,6 +24,7 @@
 		29C368322877F62D00FBD420 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 29C368312877F62D00FBD420 /* PKHUD */; };
 		29C368342877FB0F00FBD420 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368332877FB0F00FBD420 /* NetworkAPI.swift */; };
 		29C368362878594300FBD420 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368352878594300FBD420 /* UserInfoManager.swift */; };
+		29C3683A2879A43C00FBD420 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368392879A43C00FBD420 /* ChangePasswordVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		29C368252877222F00FBD420 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		29C368332877FB0F00FBD420 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		29C368352878594300FBD420 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
+		29C368392879A43C00FBD420 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				29C368252877222F00FBD420 /* Models.swift */,
 				29C36821287719AF00FBD420 /* PasswordListVC.swift */,
 				29C36823287719C600FBD420 /* MeVC.swift */,
+				29C368392879A43C00FBD420 /* ChangePasswordVC.swift */,
 				29C3680D2875B31A00FBD420 /* Assets.xcassets */,
 				29C3680F2875B31A00FBD420 /* LaunchScreen.storyboard */,
 				29C368122875B31A00FBD420 /* Info.plist */,
@@ -184,6 +187,7 @@
 				29C368092875B31700FBD420 /* LoginVC.swift in Sources */,
 				29C36822287719AF00FBD420 /* PasswordListVC.swift in Sources */,
 				29C368362878594300FBD420 /* UserInfoManager.swift in Sources */,
+				29C3683A2879A43C00FBD420 /* ChangePasswordVC.swift in Sources */,
 				29C368342877FB0F00FBD420 /* NetworkAPI.swift in Sources */,
 				29C3681E28770C6E00FBD420 /* RegisterVC.swift in Sources */,
 				29C368262877222F00FBD420 /* Models.swift in Sources */,

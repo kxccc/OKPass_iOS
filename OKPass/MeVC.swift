@@ -38,6 +38,7 @@ class MeVC: UIViewController {
         fingerprintLabel.text = "启用指纹验证"
         changePasswordButton.configuration = UIButton.Configuration.gray()
         changePasswordButton.setTitle("修改登录密码", for: .normal)
+        changePasswordButton.addTarget(self, action: #selector(clickChangePasswordButton), for: .touchUpInside)
         logoutButton.configuration = UIButton.Configuration.filled()
         logoutButton.setTitle("退出登录", for: .normal)
         logoutButton.tintColor = .red
@@ -73,5 +74,9 @@ class MeVC: UIViewController {
         let nc = UINavigationController(rootViewController: vc)
         nc.modalPresentationStyle = .fullScreen
         navigationController?.present(nc, animated: true)
+    }
+
+    @objc func clickChangePasswordButton() {
+        navigationController?.pushViewController(ChangePasswordVC(), animated: true)
     }
 }

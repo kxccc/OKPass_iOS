@@ -54,7 +54,7 @@ class RegisterVC: LoginVC {
             return
         }
 
-        NetworkAPI.Register(email: email, password: password, captcha: captcha, completion: { Result in
+        NetworkAPI.register(email: email, password: password, captcha: captcha, completion: { Result in
             switch Result {
             case let .success(res):
                 if res.status {

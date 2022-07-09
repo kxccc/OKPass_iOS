@@ -73,12 +73,35 @@ enum NetworkAPI {
         }
     }
 
-    static func Register(email: String, password: String, captcha: String, completion: @escaping (Result<GeneralRes, Error>) -> Void) {
+    static func register(email: String, password: String, captcha: String, completion: @escaping (Result<GeneralRes, Error>) -> Void) {
         let url = baseUrl + "api/register"
         AF.request(url,
                    method: .post,
                    parameters: ["email": email,
                                 "password": password,
+                                "captcha": captcha],
+                   encoding: JSONEncoding.default).responseData { response in
+            switch response.result {
+            case let .success(data):
+                if let res = try? JSONDecoder().decode(GeneralRes.self, from: data) {
+                    completion(.success(res))
+                } else {
+                    let error = NSError(domain: "NetworkAPIDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "Decode error"])
+                    completion(.failure(error))
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    static func changePassword(token: String, old_password: String, new_password: String, captcha: String, completion: @escaping (Result<GeneralRes, Error>) -> Void) {
+        let url = baseUrl + "api/passwd"
+        AF.request(url,
+                   method: .post,
+                   parameters: ["token": token,
+                                "old_password": old_password,
+                                "new_password": new_password,
                                 "captcha": captcha],
                    encoding: JSONEncoding.default).responseData { response in
             switch response.result {
