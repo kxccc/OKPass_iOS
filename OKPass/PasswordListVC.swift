@@ -76,10 +76,52 @@ extension PasswordListVC: UITableViewDataSource {
         cell.textLabel?.text = title
         return cell
     }
+
+    func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let category = PasswordManager.shared.categoryList[section]
+        return category
+    }
 }
 
 extension PasswordListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        UISwipeActionsConfiguration(actions: [
+            UIContextualAction(style: .destructive, title: "删除", handler: { _, _, completion in
+                let category = PasswordManager.shared.categoryList[indexPath.section]
+                let index = indexPath.row
+                PasswordManager.shared.delPassword(category: category, index: index)
+                completion(true)
+                self.tableView.reloadData()
+            }),
+        ])
+    }
+
+    func tableView(_: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point _: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+            UIMenu(children: [
+                UIAction(title: "复制网址") { _ in
+                    let category = PasswordManager.shared.categoryList[indexPath.section]
+                    let index = indexPath.row
+                    let data = PasswordManager.shared.password[category]?[index].url
+                    UIPasteboard.general.string = data
+                },
+                UIAction(title: "复制用户名") { _ in
+                    let category = PasswordManager.shared.categoryList[indexPath.section]
+                    let index = indexPath.row
+                    let data = PasswordManager.shared.password[category]?[index].username
+                    UIPasteboard.general.string = data
+                },
+                UIAction(title: "复制密码") { _ in
+                    let category = PasswordManager.shared.categoryList[indexPath.section]
+                    let index = indexPath.row
+                    let data = PasswordManager.shared.password[category]?[index].password
+                    UIPasteboard.general.string = data
+                },
+            ])
+        })
     }
 }

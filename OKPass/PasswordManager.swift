@@ -17,7 +17,26 @@ class PasswordManager {
 
     private init() {}
 
-    func decrypt(data: [Password]) {
+    func decrypt(data _: [Password]) {
+        for i in 0 ..< 18 {
+            let item = Password()
+            let fake = "\(i)"
+            item.id = i
+            item.title = fake + "标题标题"
+            item.url = fake + "url"
+            item.username = fake + "用户名"
+            item.password = fake + "密码"
+            item.remark = fake
+            item.category = "\(i % 9)哈哈哈"
+            if !password.keys.contains(item.category) {
+                categoryList.append(item.category)
+                password.updateValue([], forKey: item.category)
+            }
+            password[item.category]?.append(item)
+        }
+    }
+
+    func decrypt1(data: [Password]) {
         for i in data {
             let item = Password()
             item.id = i.id
@@ -32,7 +51,6 @@ class PasswordManager {
                 password.updateValue([], forKey: item.category)
             }
             password[item.category]?.append(item)
-            print(password[item.category]?.last?.title ?? "")
         }
     }
 
@@ -46,5 +64,9 @@ class PasswordManager {
             print(error)
         }
         return res
+    }
+
+    func delPassword(category: String, index: Int) {
+        password[category]?.remove(at: index)
     }
 }
