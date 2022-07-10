@@ -29,7 +29,7 @@ class AddPasswordRes: Codable {
 class GetPasswordRes: Codable {
     var status: Bool
     var msg: String
-    var data: Password?
+    var data: [Password]?
 }
 
 class Password: Codable {

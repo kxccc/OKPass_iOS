@@ -117,4 +117,24 @@ enum NetworkAPI {
             }
         }
     }
+
+    static func getPassword(token: String, completion: @escaping (Result<GetPasswordRes, Error>) -> Void) {
+        let url = baseUrl + "api/allpassword"
+        AF.request(url,
+                   method: .post,
+                   parameters: ["token": token],
+                   encoding: JSONEncoding.default).responseData { response in
+            switch response.result {
+            case let .success(data):
+                if let res = try? JSONDecoder().decode(GetPasswordRes.self, from: data) {
+                    completion(.success(res))
+                } else {
+                    let error = NSError(domain: "NetworkAPIDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "Decode error"])
+                    completion(.failure(error))
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
