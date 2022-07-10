@@ -54,7 +54,8 @@ class RegisterVC: LoginVC {
             return
         }
 
-        NetworkAPI.register(email: email, password: password, captcha: captcha, completion: { Result in
+        NetworkAPI.register(email: email, password: password, captcha: captcha, completion: { [weak self] Result in
+            guard let self = self else { return }
             switch Result {
             case let .success(res):
                 if res.status {
@@ -76,7 +77,8 @@ class RegisterVC: LoginVC {
             return
         }
 
-        NetworkAPI.getRegisterCaptcha(email: email, completion: { Result in
+        NetworkAPI.getRegisterCaptcha(email: email, completion: { [weak self] Result in
+            guard let self = self else { return }
             switch Result {
             case let .success(res):
                 if res.status {

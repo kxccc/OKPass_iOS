@@ -156,7 +156,8 @@ class LoginVC: UIViewController {
             return
         }
 
-        NetworkAPI.Login(email: email, password: password, captcha: captcha, completion: { Result in
+        NetworkAPI.Login(email: email, password: password, captcha: captcha, completion: { [weak self] Result in
+            guard let self = self else { return }
             switch Result {
             case let .success(res):
                 if res.status {
@@ -179,7 +180,8 @@ class LoginVC: UIViewController {
             HUD.flash(.label("请输入邮箱"), delay: 0.5)
             return
         }
-        NetworkAPI.getLoginCaptcha(email: email, completion: { Result in
+        NetworkAPI.getLoginCaptcha(email: email, completion: { [weak self] Result in
+            guard let self = self else { return }
             switch Result {
             case let .success(res):
                 if res.status {

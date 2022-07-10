@@ -18,8 +18,8 @@ class UserInfoManager {
         url.appendPathComponent("user_info.json")
         return url
     }
-    
-    private init(){}
+
+    private init() {}
 
     func save(user: String, token: String, key: String) {
         userInfo.user = user

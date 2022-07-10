@@ -42,7 +42,8 @@ class ChangePasswordVC: LoginVC {
             return
         }
 
-        NetworkAPI.changePassword(token: UserInfoManager.shared.userInfo.token, old_password: old_password, new_password: new_password, captcha: captcha, completion: { Result in
+        NetworkAPI.changePassword(token: UserInfoManager.shared.userInfo.token, old_password: old_password, new_password: new_password, captcha: captcha, completion: { [weak self] Result in
+            guard let self = self else { return }
             switch Result {
             case let .success(res):
                 if res.status {
@@ -66,7 +67,8 @@ class ChangePasswordVC: LoginVC {
     @objc override func clickGetCaptchaButton() {
         let email = UserInfoManager.shared.userInfo.user
 
-        NetworkAPI.getLoginCaptcha(email: email, completion: { Result in
+        NetworkAPI.getLoginCaptcha(email: email, completion: { [weak self] Result in
+            guard let self = self else { return }
             switch Result {
             case let .success(res):
                 if res.status {

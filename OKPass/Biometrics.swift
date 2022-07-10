@@ -11,8 +11,8 @@ class Biometrics {
 
     let context = LAContext()
     var error: NSError?
-    
-    private init(){}
+
+    private init() {}
 
     func canEvaluatePolicy() -> Bool {
         if context.canEvaluatePolicy(
@@ -32,7 +32,7 @@ class Biometrics {
 
     func authorizeBiometrics() {
         context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "请验证") { [weak self] _, error in
-            guard let self = self else {return}
+            guard let self = self else { return }
             if let err = error {
                 switch err._code {
                 case LAError.Code.systemCancel.rawValue:
