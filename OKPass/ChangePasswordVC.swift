@@ -42,19 +42,11 @@ class ChangePasswordVC: LoginVC {
             return
         }
 
-        NetworkAPI.changePassword(token: UserInfoManager.shared.userInfo.token, old_password: old_password, new_password: new_password, captcha: captcha, completion: { [weak self] Result in
-            guard let self = self else { return }
+        NetworkAPI.changePassword(token: UserInfoManager.shared.userInfo.token, old_password: old_password, new_password: new_password, captcha: captcha, completion: { Result in
             switch Result {
             case let .success(res):
                 if res.status {
-                    HUD.flash(.label("修改成功"), delay: 1)
-                    UserInfoManager.shared.remove()
-                    let vc = LoginVC()
-                    let nc = UINavigationController(rootViewController: vc)
-                    nc.modalPresentationStyle = .fullScreen
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.navigationController?.present(nc, animated: true)
-                    }
+                    UserInfoManager.shared.logout()
                 } else {
                     HUD.flash(.label(res.msg), delay: 0.5)
                 }

@@ -1,10 +1,11 @@
 //
-//  Fingerprint.swift
+//  Biometrics.swift
 //  OKPass
 //
 //  Created by 陈治成 on 2022/7/9.
 //
 import LocalAuthentication
+import UIKit
 
 class Biometrics {
     static let shared = Biometrics()
@@ -30,26 +31,51 @@ class Biometrics {
         print("err > \(err ?? "no error")")
     }
 
-    func authorizeBiometrics() {
-        context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "请验证") { [weak self] _, error in
-            guard let self = self else { return }
+    func authorizeBiometrics(completion: @escaping (Result<Int, Error>) -> Void) {
+        if !canEvaluatePolicy() {
+            completion(.failure(error!))
+        }
+        context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "请验证") { _, error in
             if let err = error {
-                switch err._code {
-                case LAError.Code.systemCancel.rawValue:
-                    self.notifyUser("Session cancelled", err: err.localizedDescription)
-                case LAError.Code.userCancel.rawValue:
-                    // 用户取消
-                    self.notifyUser("Please try again", err: err.localizedDescription)
-                case LAError.Code.userFallback.rawValue:
-                    // 用户选择输入密码
-                    self.notifyUser("Authentication", err: "Password option selected")
-                default:
-                    // 多次失败
-                    self.notifyUser("Authentication failed", err: err.localizedDescription)
-                }
+                completion(.failure(err))
             } else {
-                self.notifyUser("Authentication Successful", err: "You now have full access")
+                completion(.success(1))
             }
         }
+    }
+
+    @objc func appWillEnterForeground() {
+        if UserInfoManager.shared.userInfo.enableBiometrics {
+            Biometrics.shared.authorizeBiometrics(completion: { Result in
+                switch Result {
+                case .success: break
+                case .failure:
+                    DispatchQueue.main.async {
+                        UserInfoManager.shared.logout()
+                    }
+                }
+            })
+        }
+    }
+
+    func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+
+    func removeObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+}
+
+extension UIApplication {
+    class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return getTopViewController(base: nav.visibleViewController)
+        } else if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
+            return getTopViewController(base: selected)
+        } else if let presented = base?.presentedViewController {
+            return getTopViewController(base: presented)
+        }
+        return base
     }
 }

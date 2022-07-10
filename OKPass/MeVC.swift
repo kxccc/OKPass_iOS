@@ -72,11 +72,7 @@ class MeVC: UIViewController {
     }
 
     @objc func clickLogoutButton() {
-        UserInfoManager.shared.remove()
-        let vc = LoginVC()
-        let nc = UINavigationController(rootViewController: vc)
-        nc.modalPresentationStyle = .fullScreen
-        navigationController?.present(nc, animated: true)
+        UserInfoManager.shared.logout()
     }
 
     @objc func clickChangePasswordButton() {
@@ -84,8 +80,23 @@ class MeVC: UIViewController {
     }
 
     @objc func clickBiometricsSwitch() {
-        UserInfoManager.shared.userInfo.enableBiometrics = biometricsSwitch.isOn
-        UserInfoManager.shared.save()
-        if biometricsSwitch.isOn {}
+        if biometricsSwitch.isOn {
+            Biometrics.shared.authorizeBiometrics(completion: { [weak self] Result in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    switch Result {
+                    case .success:
+                        break
+                    case .failure:
+                        self.biometricsSwitch.isOn = false
+                    }
+                    UserInfoManager.shared.userInfo.enableBiometrics = self.biometricsSwitch.isOn
+                    UserInfoManager.shared.save()
+                }
+            })
+        } else {
+            UserInfoManager.shared.userInfo.enableBiometrics = biometricsSwitch.isOn
+            UserInfoManager.shared.save()
+        }
     }
 }

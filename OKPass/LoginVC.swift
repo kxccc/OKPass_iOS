@@ -104,11 +104,19 @@ class LoginVC: UIViewController {
     }
 
     override func viewWillAppear(_: Bool) {
-        if UserInfoManager.shared.load() && UserInfoManager.shared.userInfo.enableBiometrics {
-            Biometrics.shared.authorizeBiometrics()
-            let vc = TabBarController()
-            vc.modalPresentationStyle = .fullScreen
-            navigationController?.present(vc, animated: false)
+        if UserInfoManager.shared.load() && Biometrics.shared.canEvaluatePolicy() && UserInfoManager.shared.userInfo.enableBiometrics {
+            Biometrics.shared.authorizeBiometrics(completion: { [weak self] Result in
+                guard let self = self else { return }
+                switch Result {
+                case .success:
+                    DispatchQueue.main.async {
+                        let vc = TabBarController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self.navigationController?.present(vc, animated: false)
+                    }
+                case .failure: break
+                }
+            })
         }
     }
 
@@ -161,7 +169,7 @@ class LoginVC: UIViewController {
             switch Result {
             case let .success(res):
                 if res.status {
-                    UserInfoManager.shared.save(user: email, token: res.data!.token, key: res.data!.key)
+                    UserInfoManager.shared.login(user: email, token: res.data!.token, key: res.data!.key)
                     let vc = TabBarController()
                     vc.modalPresentationStyle = .fullScreen
                     self.navigationController?.present(vc, animated: true)

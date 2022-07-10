@@ -21,16 +21,13 @@ class UserInfoManager {
 
     private init() {}
 
-    func save(user: String, token: String, key: String) {
+    func login(user: String, token: String, key: String) {
         userInfo.user = user
         userInfo.token = token
         userInfo.key = key
 
-        if let data = try? JSONEncoder().encode(userInfo) {
-            lock.wait()
-            try? data.write(to: userInfoUrl)
-            lock.signal()
-        }
+        save()
+        Biometrics.shared.addObserver()
     }
 
     func save() {
@@ -41,8 +38,14 @@ class UserInfoManager {
         }
     }
 
-    func remove() {
+    func logout() {
         try? FileManager.default.removeItem(at: userInfoUrl)
+        userInfo = UserInfo()
+        let vc = LoginVC()
+        let nc = UINavigationController(rootViewController: vc)
+        nc.modalPresentationStyle = .fullScreen
+        UIApplication.getTopViewController()?.navigationController?.present(nc, animated: true)
+        Biometrics.shared.removeObserver()
     }
 
     func load() -> Bool {
