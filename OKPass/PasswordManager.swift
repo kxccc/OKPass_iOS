@@ -5,6 +5,7 @@
 //  Created by 陈治成 on 2022/7/10.
 //
 
+import PKHUD
 import RNCryptor
 import UIKit
 
@@ -14,29 +15,13 @@ class PasswordManager {
     var categoryList: [String] = []
     var password: [String: [Password]] = [:]
     var key = UserInfoManager.shared.userInfo.key
+    var token = UserInfoManager.shared.userInfo.token
 
     private init() {}
 
-    func decrypt(data _: [Password]) {
-        for i in 0 ..< 18 {
-            let item = Password()
-            let fake = "\(i)"
-            item.id = i
-            item.title = fake + "标题标题"
-            item.url = fake + "url"
-            item.username = fake + "用户名"
-            item.password = fake + "密码"
-            item.remark = fake
-            item.category = "\(i % 9)哈哈哈"
-            if !password.keys.contains(item.category) {
-                categoryList.append(item.category)
-                password.updateValue([], forKey: item.category)
-            }
-            password[item.category]?.append(item)
-        }
-    }
-
-    func decrypt1(data: [Password]) {
+    func decrypt(data: [Password]) {
+        categoryList.removeAll()
+        password.removeAll()
         for i in data {
             let item = Password()
             item.id = i.id
@@ -55,9 +40,9 @@ class PasswordManager {
     }
 
     func decryptWithKey(_ ciphertext: String) -> String {
-        let ciphertext = Data(base64Encoded: ciphertext)!
         var res = "解密错误"
         do {
+            guard let ciphertext = Data(base64Encoded: ciphertext) else { return res }
             let originalData = try RNCryptor.decrypt(data: ciphertext, withPassword: key)
             res = String(data: originalData, encoding: .utf8)!
         } catch {
@@ -66,7 +51,66 @@ class PasswordManager {
         return res
     }
 
-    func delPassword(category: String, index: Int) {
-        password[category]?.remove(at: index)
+    func encryptWithKey(_ plaintext: String) -> String {
+        let data: Data = plaintext.data(using: .utf8)!
+        let ciphertext = RNCryptor.encrypt(data: data, withPassword: key)
+        let res: String = ciphertext.base64EncodedString()
+
+        return res
+    }
+
+    func delPassword(category: String, index: Int, completion: @escaping () -> Void) {
+        let id = password[category]?[index].id ?? -1
+        NetworkAPI.delPassword(token: token, id: id, completion: { [weak self] Result in
+            guard let self = self else { return }
+            switch Result {
+            case let .success(res):
+                if res.status {
+                    self.password[category]?.remove(at: index)
+                    completion()
+                } else {
+                    HUD.flash(.label(res.msg), delay: 0.5)
+                }
+            case let .failure(error):
+                HUD.flash(.label(error.localizedDescription), delay: 0.5)
+            }
+
+        })
+    }
+
+    func addPassword(title: String, url: String, username: String, password: String, remark: String, category: String, completion: @escaping () -> Void) {
+        let encryptedTitle = encryptWithKey(title)
+        let encryptedUrl = encryptWithKey(url)
+        let encryptedUsername = encryptWithKey(username)
+        let encryptedPassword = encryptWithKey(password)
+        let encryptedRemark = encryptWithKey(remark)
+        let encryptedCategory = encryptWithKey(category)
+
+        NetworkAPI.addPassword(token: token, title: encryptedTitle, url: encryptedUrl, username: encryptedUsername, password: encryptedPassword, remark: encryptedRemark, category: encryptedCategory, completion: { [weak self] Result in
+            guard let self = self else { return }
+            switch Result {
+            case let .success(res):
+                if res.status {
+                    let newPassword = Password()
+                    newPassword.id = res.id!
+                    newPassword.title = title
+                    newPassword.url = url
+                    newPassword.username = username
+                    newPassword.password = password
+                    newPassword.remark = remark
+                    newPassword.category = category
+                    if !self.password.keys.contains(category) {
+                        self.categoryList.insert(category, at: 0)
+                        self.password.updateValue([], forKey: category)
+                    }
+                    self.password[category]?.insert(newPassword, at: 0)
+                    completion()
+                } else {
+                    HUD.flash(.label(res.msg), delay: 0.5)
+                }
+            case let .failure(error):
+                HUD.flash(.label(error.localizedDescription), delay: 0.5)
+            }
+        })
     }
 }

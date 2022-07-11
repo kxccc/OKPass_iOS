@@ -42,7 +42,7 @@ class ChangePasswordVC: LoginVC {
             return
         }
 
-        NetworkAPI.changePassword(token: UserInfoManager.shared.userInfo.token, old_password: old_password, new_password: new_password, captcha: captcha, completion: { Result in
+        NetworkAPI.changeLoginPassword(token: UserInfoManager.shared.userInfo.token, old_password: old_password, new_password: new_password, captcha: captcha, completion: { Result in
             switch Result {
             case let .success(res):
                 if res.status {
