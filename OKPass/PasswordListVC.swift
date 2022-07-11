@@ -30,7 +30,8 @@ class PasswordListVC: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-        let header = MJRefreshNormalHeader {
+        let header = MJRefreshNormalHeader { [weak self] in
+            guard let self = self else { return }
             self.refreshData()
         }
         header.lastUpdatedTimeLabel?.isHidden = true
