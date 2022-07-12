@@ -12,6 +12,7 @@ import UIKit
 class PasswordListVC: UIViewController {
     private var tableView: UITableView!
     private var searchBar: UISearchBar!
+    private var isSearching: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,9 +21,9 @@ class PasswordListVC: UIViewController {
 
         searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
         searchBar.searchBarStyle = .minimal
+        searchBar.delegate = self
         tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.tableHeaderView = searchBar
-        tableView.sectionHeaderHeight = 40
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.description())
         tableView.dataSource = self
@@ -121,6 +122,9 @@ extension PasswordListVC: UITableViewDataSource {
         let category = PasswordManager.shared.categoryList[indexPath.section]
         let title = PasswordManager.shared.password[category]?[indexPath.row].title ?? ""
         cell.textLabel?.text = title
+        if isSearching, let searchContent = searchBar.text, !title.contains(searchContent) {
+            cell.isHidden = true
+        }
         return cell
     }
 }
@@ -147,7 +151,26 @@ extension PasswordListVC: UITableViewDelegate {
         let v = UILabel()
         v.text = "    " + PasswordManager.shared.categoryList[section]
         v.font = .boldSystemFont(ofSize: 19)
+        if isSearching {
+            v.isHidden = true
+        }
         return v
+    }
+
+    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
+        if isSearching {
+            return 0
+        }
+        return 40
+    }
+
+    func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let category = PasswordManager.shared.categoryList[indexPath.section]
+        let title = PasswordManager.shared.password[category]?[indexPath.row].title ?? ""
+        if isSearching, let searchContent = searchBar.text, !title.contains(searchContent) {
+            return 0
+        }
+        return 45
     }
 
     func tableView(_: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point _: CGPoint) -> UIContextMenuConfiguration? {
@@ -176,5 +199,25 @@ extension PasswordListVC: UITableViewDelegate {
                 },
             ])
         })
+    }
+}
+
+extension PasswordListVC: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setValue("取消", forKey: "cancelButtonText")
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+
+    func searchBarSearchButtonClicked(_: UISearchBar) {
+        isSearching = true
+        tableView.reloadData()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.text = ""
+        view.endEditing(true)
+        tableView.reloadData()
     }
 }
