@@ -49,6 +49,7 @@ class EditVC: UIViewController {
         categoryTextField.borderStyle = .roundedRect
         generatePasswordButton.configuration = UIButton.Configuration.gray()
         generatePasswordButton.setTitle("随机生成", for: .normal)
+        generatePasswordButton.addTarget(self, action: #selector(clickGeneratePasswordButton), for: .touchUpInside)
 
         let passwordStack = UIStackView()
         passwordStack.spacing = 12
@@ -93,6 +94,10 @@ class EditVC: UIViewController {
         let category = categoryTextField.text!
         navigationController?.popViewController(animated: true)
         delegate?.savePassword(title: title, url: url, username: username, password: password, remark: remark, category: category, indexPath: indexPath)
+    }
+
+    @objc func clickGeneratePasswordButton() {
+        navigationController?.pushViewController(GeneratePasswordVC(), animated: true)
     }
 
     func setTitle(_ title: String) {
