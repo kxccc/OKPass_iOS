@@ -16,7 +16,8 @@ class PasswordListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickAddButton))
 
         searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 0, height: 60))

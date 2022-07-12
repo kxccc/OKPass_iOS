@@ -6,6 +6,7 @@
 //
 
 import PKHUD
+import SwiftUI
 import UIKit
 
 class LoginVC: UIViewController {
@@ -48,7 +49,7 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
 
         emailTextField = UITextField()
         passwordTextField = UITextField()

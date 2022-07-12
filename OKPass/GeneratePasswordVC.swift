@@ -12,7 +12,6 @@ class GeneratePasswordVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
         v = GeneratePasswordView()
         v.delegate = self
         view.addSubview(v)

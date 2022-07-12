@@ -5,6 +5,7 @@
 //  Created by 陈治成 on 2022/7/12.
 //
 
+import SwiftUI
 import UIKit
 
 protocol GeneratePasswordViewDelegate: AnyObject {
@@ -35,6 +36,7 @@ protocol GeneratePasswordViewDelegate: AnyObject {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor.systemBackground
 
         passwordTextField.borderStyle = .roundedRect
         lenLabel.textAlignment = .right
