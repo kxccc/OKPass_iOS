@@ -15,18 +15,14 @@ class GeneratePasswordVC: UIViewController {
         view.backgroundColor = .white
         v = GeneratePasswordView()
         v.delegate = self
+        view.addSubview(v)
+    }
 
-        let stack = UIStackView()
-        stack.addArrangedSubview(v)
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stack)
-
-        NSLayoutConstraint.activate([
-            stack.leftAnchor.constraint(equalTo: view.leftAnchor),
-            stack.rightAnchor.constraint(equalTo: view.rightAnchor),
-            stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stack.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+    override func viewWillLayoutSubviews() {
+        v.frame = CGRect(x: view.safeAreaInsets.left,
+                         y: view.safeAreaInsets.top,
+                         width: view.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right,
+                         height: view.bounds.height - view.safeAreaInsets.bottom - view.safeAreaInsets.top)
     }
 }
 
