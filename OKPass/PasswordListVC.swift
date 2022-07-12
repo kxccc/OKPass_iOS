@@ -11,13 +11,18 @@ import UIKit
 
 class PasswordListVC: UIViewController {
     private var tableView: UITableView!
+    private var searchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickAddButton))
 
-        tableView = UITableView()
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
+        searchBar.searchBarStyle = .minimal
+        tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.tableHeaderView = searchBar
+        tableView.sectionHeaderHeight = 40
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.description())
         tableView.dataSource = self
@@ -118,11 +123,6 @@ extension PasswordListVC: UITableViewDataSource {
         cell.textLabel?.text = title
         return cell
     }
-
-    func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let category = PasswordManager.shared.categoryList[section]
-        return category
-    }
 }
 
 extension PasswordListVC: UITableViewDelegate {
@@ -136,12 +136,18 @@ extension PasswordListVC: UITableViewDelegate {
 
     func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         UISwipeActionsConfiguration(actions: [
-            UIContextualAction(style: .destructive, title: "删除", handler: { [weak self] _, _, completion in
+            UIContextualAction(style: .destructive, title: "删除", handler: { [weak self] _, _, _ in
                 guard let self = self else { return }
-                completion(true)
                 self.delPassword(indexPath: indexPath)
             }),
         ])
+    }
+
+    func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let v = UILabel()
+        v.text = "    " + PasswordManager.shared.categoryList[section]
+        v.font = .boldSystemFont(ofSize: 19)
+        return v
     }
 
     func tableView(_: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point _: CGPoint) -> UIContextMenuConfiguration? {
