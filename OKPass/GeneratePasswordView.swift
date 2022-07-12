@@ -7,13 +7,18 @@
 
 import UIKit
 
+protocol GeneratePasswordViewDelegate: AnyObject {
+    func lenSliderValueChanged(_ sender: UISlider)
+}
+
 @IBDesignable class GeneratePasswordView: UIView {
-    private var len = 16 {
+    var len: Int = 16 {
         didSet {
             lenLabel.text = "\(len)" + "位密码"
         }
     }
 
+    weak var delegate: GeneratePasswordViewDelegate?
     private let passwordTextField: UITextField = .init()
     private let lenLabel: UILabel = .init()
     private let lenSlider: UISlider = .init()
@@ -30,14 +35,16 @@ import UIKit
         super.init(frame: frame)
 
         passwordTextField.borderStyle = .roundedRect
-        len = 16
+        lenLabel.textAlignment = .right
         lenLabel.text = "\(len)" + "位密码"
-        len = 15
+        lenSlider.value = 0.5
+        lenSlider.addTarget(self, action: #selector(lenSliderValueChanged(_:)), for: .valueChanged)
 
         let vStack = UIStackView()
         vStack.translatesAutoresizingMaskIntoConstraints = false
         vStack.axis = .vertical
         vStack.spacing = 15
+        vStack.alignment = .center
 
         vStack.addArrangedSubview(passwordTextField)
         vStack.addArrangedSubview(lenLabel)
@@ -45,14 +52,21 @@ import UIKit
         addSubview(vStack)
 
         NSLayoutConstraint.activate([
-            vStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 30),
-            vStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -30),
+            vStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 40),
+            vStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -40),
             vStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             vStack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            passwordTextField.widthAnchor.constraint(equalTo: vStack.widthAnchor),
+            lenLabel.widthAnchor.constraint(equalToConstant: 75),
+            lenSlider.widthAnchor.constraint(equalTo: vStack.widthAnchor),
         ])
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+
+    @objc func lenSliderValueChanged(_ sender: UISlider) {
+        delegate?.lenSliderValueChanged(sender)
     }
 }
