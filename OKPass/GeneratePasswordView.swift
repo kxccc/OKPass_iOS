@@ -36,7 +36,6 @@ protocol GeneratePasswordViewDelegate: AnyObject {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.systemBackground
 
         passwordTextField.borderStyle = .roundedRect
         lenLabel.textAlignment = .right
