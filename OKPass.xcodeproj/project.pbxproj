@@ -14,6 +14,7 @@
 		29390B49287D58E600D78BDE /* GeneratePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29390B48287D58E500D78BDE /* GeneratePasswordView.swift */; };
 		299022D3287E7370007DA438 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299022D2287E7370007DA438 /* LoginView.swift */; };
 		299022D5287EBC0F007DA438 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299022D4287EBC0F007DA438 /* MeView.swift */; };
+		299022D7287EC591007DA438 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299022D6287EC591007DA438 /* EditView.swift */; };
 		29C368052875B31700FBD420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368042875B31700FBD420 /* AppDelegate.swift */; };
 		29C368072875B31700FBD420 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368062875B31700FBD420 /* SceneDelegate.swift */; };
 		29C368092875B31700FBD420 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368082875B31700FBD420 /* LoginVC.swift */; };
@@ -43,6 +44,7 @@
 		29390B48287D58E500D78BDE /* GeneratePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePasswordView.swift; sourceTree = "<group>"; };
 		299022D2287E7370007DA438 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		299022D4287EBC0F007DA438 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
+		299022D6287EC591007DA438 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		29C368012875B31700FBD420 /* OKPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OKPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C368042875B31700FBD420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29C368062875B31700FBD420 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				29C368252877222F00FBD420 /* Models.swift */,
 				29C36821287719AF00FBD420 /* PasswordListVC.swift */,
 				29390B44287BC96B00D78BDE /* EditVC.swift */,
+				299022D6287EC591007DA438 /* EditView.swift */,
 				29C3680D2875B31A00FBD420 /* Assets.xcassets */,
 				29C3680F2875B31A00FBD420 /* LaunchScreen.storyboard */,
 				29094CD5287D638C003866B5 /* temp.storyboard */,
@@ -218,6 +221,7 @@
 				299022D5287EBC0F007DA438 /* MeView.swift in Sources */,
 				29390B49287D58E600D78BDE /* GeneratePasswordView.swift in Sources */,
 				29390B45287BC96B00D78BDE /* EditVC.swift in Sources */,
+				299022D7287EC591007DA438 /* EditView.swift in Sources */,
 				29C368342877FB0F00FBD420 /* NetworkAPI.swift in Sources */,
 				29C3681E28770C6E00FBD420 /* RegisterVC.swift in Sources */,
 				299022D3287E7370007DA438 /* LoginView.swift in Sources */,

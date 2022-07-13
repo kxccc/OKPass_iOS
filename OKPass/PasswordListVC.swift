@@ -75,13 +75,7 @@ class PasswordListVC: UIViewController {
         let vc = EditVC()
         vc.delegate = self
         if let password = password, let indexPath = indexPath {
-            vc.setTitle(password.title)
-            vc.setUrl(password.url)
-            vc.setUsername(password.username)
-            vc.setPassword(password.password)
-            vc.setRemark(password.remark)
-            vc.setCategory(password.category)
-            vc.setIndexPath(indexPath)
+            vc.setText(title: password.title, url: password.url, username: password.username, password: password.password, remark: password.remark, category: password.category, indexPath: indexPath)
         }
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -12,22 +12,9 @@ protocol EditVCDelegate: AnyObject {
 }
 
 class EditVC: UIViewController {
-    private var indexPath: IndexPath?
     weak var delegate: EditVCDelegate?
 
-    private var titleLabel = UILabel()
-    private var titleTextField = UITextField()
-    private var urlLabel = UILabel()
-    private var urlTextField = UITextField()
-    private var usernameLabel = UILabel()
-    private var usernameTextField = UITextField()
-    private var passwordLabel = UILabel()
-    private var passwordTextField = UITextField()
-    private var generatePasswordButton = UIButton()
-    private var remarkLabel = UILabel()
-    private var remarkTextField = UITextField()
-    private var categoryLabel = UILabel()
-    private var categoryTextField = UITextField()
+    private var v: EditView = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,97 +22,42 @@ class EditVC: UIViewController {
 
         title = "编辑"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .done, target: self, action: #selector(clickSaveButton))
+        v.delegate = self
+        view.addSubview(v)
+    }
 
-        titleLabel.text = "标题"
-        urlLabel.text = "网址"
-        usernameLabel.text = "用户名"
-        passwordLabel.text = "密码"
-        remarkLabel.text = "备注"
-        categoryLabel.text = "分类"
-        titleTextField.borderStyle = .roundedRect
-        urlTextField.borderStyle = .roundedRect
-        usernameTextField.borderStyle = .roundedRect
-        passwordTextField.borderStyle = .roundedRect
-        remarkTextField.borderStyle = .roundedRect
-        categoryTextField.borderStyle = .roundedRect
-        generatePasswordButton.configuration = UIButton.Configuration.gray()
-        generatePasswordButton.setTitle("随机生成", for: .normal)
-        generatePasswordButton.addTarget(self, action: #selector(clickGeneratePasswordButton), for: .touchUpInside)
+    func setText(title: String, url: String, username: String, password: String, remark: String, category: String, indexPath: IndexPath) {
+        v.setTitle(title)
+        v.setUrl(url)
+        v.setUsername(username)
+        v.setPassword(password)
+        v.setRemark(remark)
+        v.setCategory(category)
+        v.setIndexPath(indexPath)
+    }
 
-        let passwordStack = UIStackView()
-        passwordStack.spacing = 12
-        passwordStack.addArrangedSubview(passwordTextField)
-        passwordStack.addArrangedSubview(generatePasswordButton)
-        NSLayoutConstraint.activate([
-            passwordTextField.widthAnchor.constraint(equalTo: passwordStack.widthAnchor, multiplier: 0.65),
-        ])
-
-        let vStack = UIStackView()
-        vStack.translatesAutoresizingMaskIntoConstraints = false
-        vStack.spacing = 12
-        vStack.axis = .vertical
-
-        vStack.addArrangedSubview(titleLabel)
-        vStack.addArrangedSubview(titleTextField)
-        vStack.addArrangedSubview(urlLabel)
-        vStack.addArrangedSubview(urlTextField)
-        vStack.addArrangedSubview(usernameLabel)
-        vStack.addArrangedSubview(usernameTextField)
-        vStack.addArrangedSubview(passwordLabel)
-        vStack.addArrangedSubview(passwordStack)
-        vStack.addArrangedSubview(remarkLabel)
-        vStack.addArrangedSubview(remarkTextField)
-        vStack.addArrangedSubview(categoryLabel)
-        vStack.addArrangedSubview(categoryTextField)
-        view.addSubview(vStack)
-
-        NSLayoutConstraint.activate([
-            vStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            vStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            vStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-        ])
+    override func viewWillLayoutSubviews() {
+        v.frame = CGRect(x: view.safeAreaInsets.left,
+                         y: view.safeAreaInsets.top,
+                         width: view.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right,
+                         height: view.bounds.height - view.safeAreaInsets.bottom - view.safeAreaInsets.top)
     }
 
     @objc func clickSaveButton() {
-        let title = titleTextField.text!
-        let url = urlTextField.text!
-        let username = usernameTextField.text!
-        let password = passwordTextField.text!
-        let remark = remarkTextField.text!
-        let category = categoryTextField.text!
+        let title = v.titleTextField.text!
+        let url = v.urlTextField.text!
+        let username = v.usernameTextField.text!
+        let password = v.passwordTextField.text!
+        let remark = v.remarkTextField.text!
+        let category = v.categoryTextField.text!
+        let indexPath = v.indexPath
         navigationController?.popViewController(animated: true)
         delegate?.savePassword(title: title, url: url, username: username, password: password, remark: remark, category: category, indexPath: indexPath)
     }
+}
 
-    @objc func clickGeneratePasswordButton() {
+extension EditVC: EditViewDelegate {
+    func clickGeneratePasswordButton(_: EditView) {
         navigationController?.pushViewController(GeneratePasswordVC(), animated: true)
-    }
-
-    func setTitle(_ title: String) {
-        titleTextField.text = title
-    }
-
-    func setUrl(_ url: String) {
-        urlTextField.text = url
-    }
-
-    func setUsername(_ username: String) {
-        usernameTextField.text = username
-    }
-
-    func setPassword(_ password: String) {
-        passwordTextField.text = password
-    }
-
-    func setRemark(_ remark: String) {
-        remarkTextField.text = remark
-    }
-
-    func setCategory(_ category: String) {
-        categoryTextField.text = category
-    }
-
-    func setIndexPath(_ indexPath: IndexPath) {
-        self.indexPath = indexPath
     }
 }
