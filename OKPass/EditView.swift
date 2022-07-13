@@ -42,6 +42,7 @@ class EditView: UIView {
         titleTextField.borderStyle = .roundedRect
         urlTextField.borderStyle = .roundedRect
         usernameTextField.borderStyle = .roundedRect
+        usernameTextField.spellCheckingType = .no
         passwordTextField.borderStyle = .roundedRect
         remarkTextField.borderStyle = .roundedRect
         categoryTextField.borderStyle = .roundedRect
