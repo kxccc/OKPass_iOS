@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		29094CD4287D6194003866B5 /* GeneratePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29094CD3287D6194003866B5 /* GeneratePasswordVC.swift */; };
-		29094CD6287D638C003866B5 /* temp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29094CD5287D638C003866B5 /* temp.storyboard */; };
 		29390B43287AEC3900D78BDE /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29390B42287AEC3900D78BDE /* PasswordManager.swift */; };
 		29390B45287BC96B00D78BDE /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29390B44287BC96B00D78BDE /* EditVC.swift */; };
 		29390B49287D58E600D78BDE /* GeneratePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29390B48287D58E500D78BDE /* GeneratePasswordView.swift */; };
 		299022D3287E7370007DA438 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299022D2287E7370007DA438 /* LoginView.swift */; };
 		299022D5287EBC0F007DA438 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299022D4287EBC0F007DA438 /* MeView.swift */; };
 		299022D7287EC591007DA438 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299022D6287EC591007DA438 /* EditView.swift */; };
+		299022DB287EEBD2007DA438 /* PasswordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299022DA287EEBD2007DA438 /* PasswordListView.swift */; };
 		29C368052875B31700FBD420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368042875B31700FBD420 /* AppDelegate.swift */; };
 		29C368072875B31700FBD420 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368062875B31700FBD420 /* SceneDelegate.swift */; };
 		29C368092875B31700FBD420 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C368082875B31700FBD420 /* LoginVC.swift */; };
@@ -38,13 +38,13 @@
 
 /* Begin PBXFileReference section */
 		29094CD3287D6194003866B5 /* GeneratePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePasswordVC.swift; sourceTree = "<group>"; };
-		29094CD5287D638C003866B5 /* temp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = temp.storyboard; sourceTree = "<group>"; };
 		29390B42287AEC3900D78BDE /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
 		29390B44287BC96B00D78BDE /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		29390B48287D58E500D78BDE /* GeneratePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePasswordView.swift; sourceTree = "<group>"; };
 		299022D2287E7370007DA438 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		299022D4287EBC0F007DA438 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		299022D6287EC591007DA438 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		299022DA287EEBD2007DA438 /* PasswordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListView.swift; sourceTree = "<group>"; };
 		29C368012875B31700FBD420 /* OKPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OKPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C368042875B31700FBD420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29C368062875B31700FBD420 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,21 +105,21 @@
 				29C368392879A43C00FBD420 /* ChangePasswordVC.swift */,
 				29094CD3287D6194003866B5 /* GeneratePasswordVC.swift */,
 				29C36823287719C600FBD420 /* MeVC.swift */,
+				29390B44287BC96B00D78BDE /* EditVC.swift */,
 				29C3681F2877188000FBD420 /* TabBarController.swift */,
 				299022D2287E7370007DA438 /* LoginView.swift */,
 				299022D4287EBC0F007DA438 /* MeView.swift */,
 				29390B48287D58E500D78BDE /* GeneratePasswordView.swift */,
+				299022D6287EC591007DA438 /* EditView.swift */,
 				29C3683B2879C43E00FBD420 /* Biometrics.swift */,
 				29C368352878594300FBD420 /* UserInfoManager.swift */,
 				29390B42287AEC3900D78BDE /* PasswordManager.swift */,
 				29C368332877FB0F00FBD420 /* NetworkAPI.swift */,
 				29C368252877222F00FBD420 /* Models.swift */,
 				29C36821287719AF00FBD420 /* PasswordListVC.swift */,
-				29390B44287BC96B00D78BDE /* EditVC.swift */,
-				299022D6287EC591007DA438 /* EditView.swift */,
+				299022DA287EEBD2007DA438 /* PasswordListView.swift */,
 				29C3680D2875B31A00FBD420 /* Assets.xcassets */,
 				29C3680F2875B31A00FBD420 /* LaunchScreen.storyboard */,
-				29094CD5287D638C003866B5 /* temp.storyboard */,
 				29C368122875B31A00FBD420 /* Info.plist */,
 			);
 			path = OKPass;
@@ -201,7 +201,6 @@
 			files = (
 				29C368112875B31A00FBD420 /* LaunchScreen.storyboard in Resources */,
 				29C3680E2875B31A00FBD420 /* Assets.xcassets in Resources */,
-				29094CD6287D638C003866B5 /* temp.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +218,7 @@
 				29C3683A2879A43C00FBD420 /* ChangePasswordVC.swift in Sources */,
 				29390B43287AEC3900D78BDE /* PasswordManager.swift in Sources */,
 				299022D5287EBC0F007DA438 /* MeView.swift in Sources */,
+				299022DB287EEBD2007DA438 /* PasswordListView.swift in Sources */,
 				29390B49287D58E600D78BDE /* GeneratePasswordView.swift in Sources */,
 				29390B45287BC96B00D78BDE /* EditVC.swift in Sources */,
 				299022D7287EC591007DA438 /* EditView.swift in Sources */,
