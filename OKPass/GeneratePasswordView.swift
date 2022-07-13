@@ -9,7 +9,9 @@ import SwiftUI
 import UIKit
 
 protocol GeneratePasswordViewDelegate: AnyObject {
-    func lenSliderValueChanged(_ sender: UISlider)
+    func lenSliderValueChanged(_ senderView: GeneratePasswordView, newValue: Float)
+    func clickGenerateButton(_ senderView: GeneratePasswordView)
+    func clickConfirmButton(_ senderView: GeneratePasswordView)
 }
 
 @IBDesignable class GeneratePasswordView: UIView {
@@ -19,8 +21,13 @@ protocol GeneratePasswordViewDelegate: AnyObject {
         }
     }
 
-    weak var delegate: GeneratePasswordViewDelegate?
-    private let passwordTextField: UITextField = .init()
+    weak var delegate: GeneratePasswordViewDelegate? {
+        didSet {
+            delegate?.clickGenerateButton(self)
+        }
+    }
+
+    let passwordTextField: UITextField = .init()
     private let lenLabel: UILabel = .init()
     private let lenSlider: UISlider = .init()
     private let uppercaseLabel: UILabel = .init()
@@ -41,7 +48,13 @@ protocol GeneratePasswordViewDelegate: AnyObject {
         lenLabel.textAlignment = .right
         lenLabel.text = "\(len)" + "位密码"
         lenSlider.value = 0.5
+        uppercaseSwitch.isOn = true
+        lowercaseSwitch.isOn = true
+        numbersSwitch.isOn = true
+        symbolsSwitch.isOn = true
         lenSlider.addTarget(self, action: #selector(lenSliderValueChanged(_:)), for: .valueChanged)
+        generateButton.addTarget(self, action: #selector(clickGenerateButton), for: .touchUpInside)
+        confirmButton.addTarget(self, action: #selector(clickConfirmButton), for: .touchUpInside)
 
         let uppercaseStack = UIStackView()
         uppercaseLabel.text = "包含大写字母"
@@ -108,6 +121,14 @@ protocol GeneratePasswordViewDelegate: AnyObject {
     }
 
     @objc func lenSliderValueChanged(_ sender: UISlider) {
-        delegate?.lenSliderValueChanged(sender)
+        delegate?.lenSliderValueChanged(self, newValue: sender.value)
+    }
+
+    @objc func clickGenerateButton(_: UIButton) {
+        delegate?.clickGenerateButton(self)
+    }
+
+    @objc func clickConfirmButton(_: UIButton) {
+        delegate?.clickConfirmButton(self)
     }
 }
