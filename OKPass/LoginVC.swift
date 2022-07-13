@@ -38,10 +38,14 @@ class LoginVC: UIViewController {
         remainingSeconds -= 1
     }
 
-    private let v = LoginView()
+    let v = LoginView()
+
+    func superViewDidLoad() {
+        super.viewDidLoad()
+    }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        superViewDidLoad()
 
         view.backgroundColor = UIColor.systemBackground
 
@@ -77,7 +81,7 @@ class LoginVC: UIViewController {
     }
 }
 
-extension LoginVC: LoginViewDelegate {
+@objc extension LoginVC: LoginViewDelegate {
     func clickAccountButton(_ senderView: LoginView) {
         let email = senderView.emailTextField.text ?? ""
         if email.isEmpty {

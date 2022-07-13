@@ -13,7 +13,7 @@ protocol LoginViewDelegate: AnyObject {
     func clickGetCaptchaButton(_ senderView: LoginView)
 }
 
-class LoginView: UIView {
+@IBDesignable class LoginView: UIView {
     weak var delegate: LoginViewDelegate?
     var emailTextField: UITextField = .init()
     var passwordTextField: UITextField = .init()
