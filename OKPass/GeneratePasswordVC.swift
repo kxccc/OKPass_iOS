@@ -7,7 +7,12 @@
 
 import UIKit
 
+protocol GeneratePasswordVCDelegate: AnyObject {
+    func newPassword(newPassword: String)
+}
+
 class GeneratePasswordVC: UIViewController {
+    weak var delegate: GeneratePasswordVCDelegate?
     private var v: GeneratePasswordView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +75,8 @@ extension GeneratePasswordVC: GeneratePasswordViewDelegate {
         senderView.passwordTextField.text = getRandomStringOfLength(length: length, characters: option)
     }
 
-    func clickConfirmButton(_: GeneratePasswordView) {
+    func clickConfirmButton(_: GeneratePasswordView, newPassword: String) {
         navigationController?.popViewController(animated: true)
+        delegate?.newPassword(newPassword: newPassword)
     }
 }

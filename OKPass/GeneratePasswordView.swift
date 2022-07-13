@@ -11,7 +11,7 @@ import UIKit
 protocol GeneratePasswordViewDelegate: AnyObject {
     func lenSliderValueChanged(_ senderView: GeneratePasswordView, newValue: Float)
     func clickGenerateButton(_ senderView: GeneratePasswordView)
-    func clickConfirmButton(_ senderView: GeneratePasswordView)
+    func clickConfirmButton(_ senderView: GeneratePasswordView, newPassword: String)
 }
 
 @IBDesignable class GeneratePasswordView: UIView {
@@ -129,6 +129,6 @@ protocol GeneratePasswordViewDelegate: AnyObject {
     }
 
     @objc func clickConfirmButton(_: UIButton) {
-        delegate?.clickConfirmButton(self)
+        delegate?.clickConfirmButton(self, newPassword: passwordTextField.text!)
     }
 }

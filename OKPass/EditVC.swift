@@ -58,6 +58,14 @@ class EditVC: UIViewController {
 
 extension EditVC: EditViewDelegate {
     func clickGeneratePasswordButton(_: EditView) {
-        navigationController?.pushViewController(GeneratePasswordVC(), animated: true)
+        let vc = GeneratePasswordVC()
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension EditVC: GeneratePasswordVCDelegate {
+    func newPassword(newPassword: String) {
+        v.passwordTextField.text = newPassword
     }
 }
