@@ -105,6 +105,9 @@ class LoginVC: UIViewController {
             case let .success(res):
                 if res.status {
                     UserInfoManager.shared.login(user: email, token: res.data!.token, key: res.data!.key)
+                    self.v.emailTextField.text = ""
+                    self.v.passwordTextField.text = ""
+                    self.v.captchaTextField.text = ""
                     let vc = TabBarController()
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true)

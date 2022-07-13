@@ -41,11 +41,8 @@ class UserInfoManager {
     func logout() {
         try? FileManager.default.removeItem(at: userInfoUrl)
         userInfo = UserInfo()
-        let vc = LoginVC()
-        let nc = UINavigationController(rootViewController: vc)
-        nc.modalPresentationStyle = .fullScreen
-        UIApplication.getTopViewController()?.navigationController?.present(nc, animated: true)
         Biometrics.shared.removeObserver()
+        UIApplication.getTopViewController()?.navigationController?.dismiss(animated: true)
     }
 
     func load() -> Bool {
