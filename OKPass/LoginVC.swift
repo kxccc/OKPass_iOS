@@ -70,14 +70,19 @@ class LoginVC: UIViewController {
                 switch Result {
                 case .success:
                     DispatchQueue.main.async {
-                        let vc = TabBarController()
-                        vc.modalPresentationStyle = .fullScreen
-                        self.present(vc, animated: true)
+                        self.loginSuccess()
                     }
                 case .failure: break
                 }
             })
         }
+    }
+
+    func loginSuccess() {
+        Biometrics.shared.addObserver()
+        let vc = TabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
@@ -108,9 +113,7 @@ class LoginVC: UIViewController {
                     self.v.emailTextField.text = ""
                     self.v.passwordTextField.text = ""
                     self.v.captchaTextField.text = ""
-                    let vc = TabBarController()
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true)
+                    self.loginSuccess()
                 } else {
                     HUD.flash(.label(res.msg), delay: 0.5)
                 }

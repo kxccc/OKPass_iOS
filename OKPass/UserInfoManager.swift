@@ -27,7 +27,6 @@ class UserInfoManager {
         userInfo.key = key
 
         save()
-        Biometrics.shared.addObserver()
     }
 
     func save() {
