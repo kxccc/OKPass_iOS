@@ -22,6 +22,10 @@ class PasswordListVC: UIViewController {
         view.addSubview(v)
     }
 
+    override func viewWillAppear(_: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+
     override func viewWillLayoutSubviews() {
         v.frame = CGRect(x: view.safeAreaInsets.left,
                          y: view.safeAreaInsets.top,
@@ -39,6 +43,7 @@ class PasswordListVC: UIViewController {
         if let password = password, let indexPath = indexPath {
             vc.setText(title: password.title, url: password.url, username: password.username, password: password.password, remark: password.remark, category: password.category, indexPath: indexPath)
         }
+        tabBarController?.tabBar.isHidden = true
         navigationController?.pushViewController(vc, animated: true)
     }
 
