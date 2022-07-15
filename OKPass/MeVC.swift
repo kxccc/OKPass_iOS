@@ -19,10 +19,6 @@ class MeVC: UIViewController {
         view.addSubview(v)
     }
 
-    override func viewWillAppear(_: Bool) {
-        tabBarController?.tabBar.isHidden = false
-    }
-
     override func viewWillLayoutSubviews() {
         v.frame = CGRect(x: view.safeAreaInsets.left,
                          y: view.safeAreaInsets.top,
@@ -37,8 +33,9 @@ extension MeVC: MeViewDelegate {
     }
 
     func clickChangePasswordButton(_: MeView) {
-        tabBarController?.tabBar.isHidden = true
-        navigationController?.pushViewController(ChangePasswordVC(), animated: true)
+        let vc = ChangePasswordVC()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     func clickBiometricsSwitch(_ senderView: MeView) {
